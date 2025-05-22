@@ -6,6 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Rota inicial para mostrar que a API está funcionando
+app.get('/', (req, res) => {
+  res.send('🎉 API da SEABOARD está ativa e funcionando!');
+});
+
+// Listar todos usuários
 app.get('/usuarios', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM usuarios');
@@ -15,6 +21,7 @@ app.get('/usuarios', async (req, res) => {
   }
 });
 
+// Buscar um usuário pelo ID
 app.get('/usuarios/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -25,6 +32,7 @@ app.get('/usuarios/:id', async (req, res) => {
   }
 });
 
+// Criar novo usuário
 app.post('/usuarios', async (req, res) => {
   try {
     const { nome, telefone, saldo } = req.body;
@@ -38,6 +46,7 @@ app.post('/usuarios', async (req, res) => {
   }
 });
 
+// Atualizar usuário
 app.put('/usuarios/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -52,6 +61,7 @@ app.put('/usuarios/:id', async (req, res) => {
   }
 });
 
+// Deletar usuário
 app.delete('/usuarios/:id', async (req, res) => {
   try {
     const { id } = req.params;
